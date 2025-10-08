@@ -1,0 +1,91 @@
+### 🔹 1. Креирај нов корисник
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "name": "Nikola",
+  "password": "kakokazes",
+  "email": "nikola@example.com",
+  "phone": "070123456"
+}
+
+###
+
+### Login and get JWT
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "nikola@example.com",
+  "password": "kakokazes"
+}
+
+### Use JWT to access protected route
+GET http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibmlrb2xhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTk5NjEyODUsImV4cCI6MTc2MDA0NzY4NX0.0vhEae-50suFhhoWa9yurEPVIzjOe5uGCVbiAMv_Eco
+
+
+### 🔹 2. Земи ги сите корисници### 🔹 2. Земи ги сите корисници
+
+
+GET http://localhost:3000/users
+
+###
+
+### 🔹 3. Земи корисник по ID
+GET http://localhost:3000/api/users/1
+
+###
+
+### 🔹 4. Ажурирај корисник
+PUT http://localhost:3000/api/users/1
+Content-Type: application/json
+
+{
+  "password": "071987654"
+}
+
+###
+
+### 🔹 5. Избриши корисник
+DELETE http://localhost:3000/api/users/2
+
+###
+
+### 🔹 6. Додај нова трговија (trade) за корисник
+POST http://localhost:3000/api/users/1/trades
+Content-Type: application/json
+
+{
+  "symbol": "ADAUSDT",
+  "amount": 100,
+  "price": 0.3,
+  "type": "buy",
+  "date": "2025-10-06T17:30:00Z"
+}
+
+###
+
+### 🔹 7. Земи ги сите трговии за корисник
+GET http://localhost:3000/api/users/2/trades
+
+###
+
+### 🔹 8. Ажурирај trade
+PUT http://localhost:3000/api/users/2/trades/3
+Content-Type: application/json
+
+{
+  "price": 0.35,
+  "amount": 120
+}
+
+###
+
+### 🔹 9. Избриши trade
+DELETE http://localhost:3000/api/users/2/trades/3
+
+###
+
+### 🔹 10. Земи преглед на трговии со суми и профит
+GET http://localhost:3000/api/users/2/summary
