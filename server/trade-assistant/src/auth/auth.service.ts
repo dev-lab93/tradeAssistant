@@ -7,6 +7,7 @@ import { Injectable, UnauthorizedException, Inject, forwardRef } from '@nestjs/c
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { UserRole } from '../users/user-role.enum';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
     @Inject(forwardRef(() => UsersService))
     private usersService: UsersService,
     private jwtService: JwtService,
-  ) {}
+  ) { }
 
   async validateUser(email: string, pass: string) {
     const user = await this.usersService.findByEmail(email);
@@ -28,19 +29,33 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = { sub: user.id, email: user.email, role: user.role };
+    const payload = { sub: Number(user.id), email: user.email, role: user.role };
     return {
       access_token: this.jwtService.sign(payload),
     };
   }
 
-  async register(name: string, email: string, password: string, phone?: string) {
+
+  // auth.service.ts
+async register(
+  name: string,
+  email: string,
+  password: string,
+  phone?: string,
+  role?: UserRole,
+) {
   const existing = await this.usersService.findByEmail(email);
   if (existing) throw new UnauthorizedException('User already exists');
 
-  const user = await this.usersService.create(name, email, password, phone);
-  const { password: _p, ...rest } = user;
-  return { user: rest };
+  const user = await this.usersService.create(
+    name,
+    email,
+    password,
+    phone,
+    role ?? UserRole.USER, // default ако не е дадено
+  );
+
+  return user; // веќе password не се враќа
 }
 
 }

@@ -3,13 +3,19 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-  "name": "Nikola",
-  "password": "kakokazes",
-  "email": "nikola@example.com",
-  "phone": "070123456"
+  "name": "Marija Admin",
+  "email": "marija.admin@example.com",
+  "password": "supersecret",
+  "phone": "070123457",
+  "role": "admin"
 }
 
 ###
+
+### 🔹 Избриши корисник со ID 4
+DELETE http://localhost:3000/users/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibmlrb2xhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjAwMDM3MzcsImV4cCI6MTc2MDA5MDEzN30._F7Bl4pg8-W9JPJSQsTnLgVt4eZUlxthZrNaVJnLaKc
+
 
 ### Login and get JWT
 POST http://localhost:3000/auth/login
@@ -21,8 +27,8 @@ Content-Type: application/json
 }
 
 ### Use JWT to access protected route
-GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibmlrb2xhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTk5NjEyODUsImV4cCI6MTc2MDA0NzY4NX0.0vhEae-50suFhhoWa9yurEPVIzjOe5uGCVbiAMv_Eco
+GET http://localhost:3000/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibmlrb2xhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjAwMDYyMDcsImV4cCI6MTc2MDA5MjYwN30.1Hycm2rcsrkk2R9GNhoqniPFuRsFj0AE85ufNQ1iF1s
 
 
 ### 🔹 2. Земи ги сите корисници### 🔹 2. Земи ги сите корисници

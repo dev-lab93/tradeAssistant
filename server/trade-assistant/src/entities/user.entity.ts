@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { UserRole } from '../users/user-role.enum';
 
 @Entity()
 export class User {
@@ -16,10 +17,10 @@ export class User {
   password: string;
 
   @Column({ nullable: true })
-  phone: string;
+  phone?: string;
 
-  @Column({ default: 'user' })
-  role: string;
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
+  role: UserRole;
 
   @CreateDateColumn()
   createdAt: Date;
