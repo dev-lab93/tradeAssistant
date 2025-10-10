@@ -1,0 +1,222 @@
+### 🔹 1. Креирај нов корисник
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "name": "Marija Admin",
+  "email": "marija.admin@example.com",
+  "password": "supersecret",
+  "phone": "070123457",
+  "role": "admin"
+}
+
+###
+
+### 🔹 Избриши корисник со ID 4
+DELETE http://localhost:3000/users/17
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibmlrb2xhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjAwMDM3MzcsImV4cCI6MTc2MDA5MDEzN30._F7Bl4pg8-W9JPJSQsTnLgVt4eZUlxthZrNaVJnLaKc
+
+
+### Login and get JWT
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "marija.admin@example.com",
+  "password": "supersecret"
+}
+
+### Use JWT to access protected route
+GET http://localhost:3000/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibmlrb2xhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjAwMDYyMDcsImV4cCI6MTc2MDA5MjYwN30.1Hycm2rcsrkk2R9GNhoqniPFuRsFj0AE85ufNQ1iF1s
+
+
+### 🔹 2. Земи ги сите корисници### 🔹 2. Земи ги сите корисници
+
+
+GET http://localhost:3000/users
+
+###
+
+### 🔹 3. Земи корисник по ID
+GET http://localhost:3000/api/users/1
+
+###
+
+### 🔹 4. Ажурирај корисник
+PUT http://localhost:3000/api/users/1
+Content-Type: application/json
+
+{
+  "password": "071987654"
+}
+
+###
+
+### 🔹 5. Избриши корисник
+DELETE http://localhost:3000/api/users/2
+
+###
+
+### 🔹 6. Додај нова трговија (trade) за корисник
+POST http://localhost:3000/api/users/1/trades
+Content-Type: application/json
+
+{
+  "symbol": "ADAUSDT",
+  "amount": 100,
+  "price": 0.3,
+  "type": "buy",
+  "date": "2025-10-06T17:30:00Z"
+}
+
+###
+
+### 🔹 7. Земи ги сите трговии за корисник
+GET http://localhost:3000/api/users/2/trades
+
+###
+
+### 🔹 8. Ажурирај trade
+PUT http://localhost:3000/api/users/2/trades/3
+Content-Type: application/json
+
+{
+  "price": 0.35,
+  "amount": 120
+}
+
+###
+
+### 🔹 9. Избриши trade
+DELETE http://localhost:3000/api/users/2/trades/3
+
+###
+
+### 🔹 10. Земи преглед на трговии со суми и профит
+GET http://localhost:3000/api/users/2/summary
+
+
+
+###
+
+POST http://localhost:3000/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+Content-Type: application/json
+
+
+{
+  "name": "Coca Cola 1.5L",
+  "category": "juice",
+  "quantity": 120,
+  "distributor": "Coca-Cola HBC",
+  "entryDate": "2025-10-10",
+  "expirationDate": "2026-02-01",
+  "purchasePrice": 35.5,
+  "salePrice": 50,
+  "barcode": "1234567890123"
+}
+
+
+###
+
+DELETE http://localhost:3000/products/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+Content-Type: application/json
+
+
+###
+
+PUT http://localhost:3000/products/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+Content-Type: application/json
+
+{
+  "quantity": 130,
+  "salePrice": 55
+}
+
+
+###
+// Земи ја вкупната вредност на магацинот ( набавна цена )
+GET http://localhost:3000/products/total-value?mode=purchase
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+Content-Type: application/json
+
+
+
+###
+// Земи ја вкупната вредност на магацинот ( продажна цена )
+GET http://localhost:3000/products/total-value?mode=sale
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+Content-Type: application/json
+
+
+
+### 1️⃣ CREATE News
+POST http://localhost:3000/news
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDEwMTQ3MiwiZXhwIjoxNzYwMTg3ODcyfQ.6XlVLDIhtdcMF95jN-byNlpl-v4RZk4dgVv37EQP-hs
+Content-Type: application/json
+
+{
+  "title": "NestJS 2025 Release",
+  "content": "New features added in NestJS 2025 version...",
+  "author": "Nikola",
+  "publishDate": "2025-10-10",
+  "category": "technology"
+}
+
+###
+
+### 2️⃣ GET All News
+GET http://localhost:3000/news?page=1&limit=10
+Authorization: Bearer <JWT_TOKEN>
+
+###
+
+### 3️⃣ GET One News by ID
+GET http://localhost:3000/news/1
+Authorization: Bearer <JWT_TOKEN>
+
+###
+
+### 4️⃣ UPDATE News
+PUT http://localhost:3000/news/1
+Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+
+{
+  "title": "NestJS 2025 Update",
+  "category": "technology",
+  "content": "Updated content for NestJS 2025 release"
+}
+
+###
+
+### 5️⃣ DELETE News
+DELETE http://localhost:3000/news/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDEwMTQ3MiwiZXhwIjoxNzYwMTg3ODcyfQ.6XlVLDIhtdcMF95jN-byNlpl-v4RZk4dgVv37EQP-hs
+
+###
+
+### 6️⃣ SEARCH News (Optional)
+GET http://localhost:3000/news?search=NestJS&page=1&limit=5
+Authorization: Bearer <JWT_TOKEN>
+
+###
+
+### 4️⃣ GET All News with Pagination
+GET http://localhost:3000/news?page=1&limit=2
+Authorization: Bearer <JWT_TOKEN>
+
+###
+
+### 5️⃣ SEARCH News by Title
+GET http://localhost:3000/news?search=Angular&page=1&limit=5
+Authorization: Bearer <JWT_TOKEN>
+
+###
+
+### 6️⃣ SEARCH News by Category
+GET http://localhost:3000/news?search=technology&page=1&limit=10
+Authorization: Bearer <JWT_TOKEN>
