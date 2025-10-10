@@ -1,10 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { IsEmail, IsString, MinLength, IsOptional, IsEnum } from 'class-validator';
-
-export enum UserRole {
-  USER = 'user',
-  ADMIN = 'admin',
-}
+import { IsEnum, IsString, IsEmail, MinLength, IsOptional } from 'class-validator';
+import { UserRole } from '../../users/user-role.enum';
 
 export class CreateUserDto {
   @IsString()
@@ -17,11 +13,10 @@ export class CreateUserDto {
   @MinLength(6)
   password: string;
 
-  @IsOptional()
   @IsString()
-  phone?: string;
+  phone: string;
 
   @IsOptional()
   @IsEnum(UserRole)
-  role?: UserRole = UserRole.USER; // default 'user'
+  role?: UserRole;
 }
