@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Post, Body, UnauthorizedException, UsePipes, ValidationPipe, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { LoginDto } from 'src/dto/login.dto';
+import { CreateUserDto } from '../dto/user/create-user.dto';
+import { LoginDto } from 'src/dto/user/login.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { RolesGuard } from './roles.guard';
 import { UserRole } from 'src/users/user-role.enum';
