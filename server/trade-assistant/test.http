@@ -10,7 +10,19 @@ Content-Type: application/json
   "role": "admin"
 }
 
-###
+### 🔹 2. Креирај нов корисник
+
+POST http://localhost:3000/auth/create-user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+
+{
+  "name": "Nikola User",
+  "email": "nikola.user@bees.mk",
+  "password": "supersecret",
+  "phone": "070123457",
+  "role": "user"
+}
 
 ### 🔹 Избриши корисник со ID 4
 DELETE http://localhost:3000/users/17
@@ -22,13 +34,13 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "marija.admin@example.com",
+  "email": "nikola.moderator@bees.mk",
   "password": "supersecret"
 }
 
 ### Use JWT to access protected route
 GET http://localhost:3000/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibmlrb2xhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjAwMDYyMDcsImV4cCI6MTc2MDA5MjYwN30.1Hycm2rcsrkk2R9GNhoqniPFuRsFj0AE85ufNQ1iF1s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6Im5pa29sYS5tb2RlcmF0b3JAYmVlcy5tayIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjAxMDM3MDcsImV4cCI6MTc2MDE5MDEwN30.AzJqKbGloOYfFsHxdRcZnu1xSjuJGWDuP_3U07nNAls
 
 
 ### 🔹 2. Земи ги сите корисници### 🔹 2. Земи ги сите корисници
@@ -54,8 +66,9 @@ Content-Type: application/json
 ###
 
 ### 🔹 5. Избриши корисник
-DELETE http://localhost:3000/api/users/2
-
+DELETE  http://localhost:3000/users/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+Content-Type: application/json
 ###
 
 ### 🔹 6. Додај нова трговија (trade) за корисник
@@ -100,7 +113,7 @@ GET http://localhost:3000/api/users/2/summary
 
 ###
 
-POST http://localhost:3000/products
+GET http://localhost:3000/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
 Content-Type: application/json
 

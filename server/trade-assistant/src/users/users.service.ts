@@ -9,6 +9,9 @@ import { UserRole } from './user-role.enum';
 
 @Injectable()
 export class UsersService {
+  findOne(id: number) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(User)
     private usersRepo: Repository<User>,
@@ -20,7 +23,7 @@ export class UsersService {
   email: string,
   plainPassword: string,
   phone?: string,
-  role?: UserRole, // веќе enum
+  role?: UserRole,
 ) {
   const existing = await this.usersRepo.findOne({ where: { email } });
   if (existing) throw new ConflictException('Email already in use');
@@ -33,13 +36,14 @@ export class UsersService {
     email,
     password: hashed,
     phone,
-    role: role ?? UserRole.USER, // default ако не е сетирано
+    role: role ?? UserRole.USER,
   });
 
   const saved = await this.usersRepo.save(user);
   const { password, ...result } = saved;
   return result;
 }
+
 
   async findAll() {
     return this.usersRepo.find();
