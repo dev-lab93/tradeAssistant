@@ -1,0 +1,16 @@
+<div class="article-details" *ngIf="news; else loading">
+  <h1>{{ news.title }}</h1>
+  <p class="meta">
+    Автор: {{ news.author || 'Непознат' }} |
+    Датум: {{ news.publishDate | date:'mediumDate' }} |
+    Категорија: {{ news.category }}
+  </p>
+  <div class="content">
+    {{ news.content }}
+  </div>
+</div>
+
+<ng-template #loading>
+  <p *ngIf="message">{{ message }}</p>
+  <p *ngIf="!message">Loading...</p>
+</ng-template>

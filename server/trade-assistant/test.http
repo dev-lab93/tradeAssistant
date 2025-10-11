@@ -39,9 +39,8 @@ Content-Type: application/json
 }
 
 ### Use JWT to access protected route
-GET http://localhost:3000/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6Im5pa29sYS5tb2RlcmF0b3JAYmVlcy5tayIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjAxMDM3MDcsImV4cCI6MTc2MDE5MDEwN30.AzJqKbGloOYfFsHxdRcZnu1xSjuJGWDuP_3U07nNAls
-
+GET http://localhost:3000/news/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6Im5pa29sYS5tb2RlcmF0b3JAYmVlcy5tayIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjAxOTQwODksImV4cCI6MTc2MDI4MDQ4OX0.-hlLTvd1OswDpBsSMP3FWqWQ3gG9FFkWH2gOmlmLzlA
 
 ### 🔹 2. Земи ги сите корисници### 🔹 2. Земи ги сите корисници
 
@@ -113,21 +112,16 @@ GET http://localhost:3000/api/users/2/summary
 
 ###
 
-GET http://localhost:3000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+POST http://localhost:3000/news
+Authorization: Bearer <mytoken>
 Content-Type: application/json
 
 
 {
-  "name": "Coca Cola 1.5L",
-  "category": "juice",
-  "quantity": 120,
-  "distributor": "Coca-Cola HBC",
-  "entryDate": "2025-10-10",
-  "expirationDate": "2026-02-01",
-  "purchasePrice": 35.5,
-  "salePrice": 50,
-  "barcode": "1234567890123"
+  "title": "NestJS нови модули",
+  "content": "NestJS воведува нови модули за подобра интеграција со микросервиси.",
+  "author": "Admin",
+  "publishDate": "2025-10-10T15:30:00Z"
 }
 
 
@@ -167,8 +161,8 @@ Content-Type: application/json
 
 
 ### 1️⃣ CREATE News
-POST http://localhost:3000/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDEwMTQ3MiwiZXhwIjoxNzYwMTg3ODcyfQ.6XlVLDIhtdcMF95jN-byNlpl-v4RZk4dgVv37EQP-hs
+GET http://localhost:3000/news
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6Im5pa29sYS5tb2RlcmF0b3JAYmVlcy5tayIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjAxOTQwODksImV4cCI6MTc2MDI4MDQ4OX0.-hlLTvd1OswDpBsSMP3FWqWQ3gG9FFkWH2gOmlmLzlA
 Content-Type: application/json
 
 {

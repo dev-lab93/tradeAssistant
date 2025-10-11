@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="message" class="message">{{ message }}</div>
+
+<h2>Вести по категорија</h2>
+<div *ngFor="let category of newsByCategory | keyvalue">
+  <h3>{{ category.key }}</h3>
+  <ul>
+    <li *ngFor="let news of category.value">
+      <a [routerLink]="['/news', news.id]">
+        {{ news.title }} - {{ news.author }} ({{ news.publishDate | date:'mediumDate' }})
+      </a>
+    </li>
+  </ul>
+</div>
+
+<h2>Вести по автор</h2>
+<div *ngFor="let author of newsByAuthor | keyvalue">
+  <h3>{{ author.key }}</h3>
+  <ul>
+    <li *ngFor="let news of author.value">
+      <a [routerLink]="['/news', news.id]">
+        {{ news.title }} - {{ news.category }} ({{ news.publishDate | date:'mediumDate' }})
+      </a>
+    </li>
+  </ul>
+</div>
+
+<h2>Вести по месец и година</h2>
+<div *ngFor="let month of newsByMonthYear | keyvalue">
+  <h3>{{ month.key }}</h3>
+  <ul>
+    <li *ngFor="let news of month.value">
+      <a [routerLink]="['/news', news.id]">
+        {{ news.title }} - {{ news.author }} ({{ news.category }})
+      </a>
+    </li>
+  </ul>
+</div>

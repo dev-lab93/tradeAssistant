@@ -3,18 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tradeAssistant": {
+    "trade-assistant": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss",
-          "standalone": false
-        },
-        "@schematics/angular:directive": {
-          "standalone": false
-        },
-        "@schematics/angular:pipe": {
-          "standalone": false
+          "style": "scss"
         }
       },
       "root": "",
@@ -71,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tradeAssistant:build:production"
+              "buildTarget": "trade-assistant:build:production"
             },
             "development": {
-              "buildTarget": "tradeAssistant:build:development"
+              "buildTarget": "trade-assistant:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -105,5 +98,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

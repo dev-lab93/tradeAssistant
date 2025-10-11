@@ -1,0 +1,51 @@
+.container {
+  padding: 2rem;
+
+  .message {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 10px;
+    background-color: #ffd7001a;
+    color: #333;
+    font-weight: 600;
+  }
+
+  .news-section {
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #222;
+      border-bottom: 2px solid #ffd700;
+      display: inline-block;
+      padding-bottom: 0.3rem;
+    }
+
+    .news-category, .news-author, .news-month {
+      margin-bottom: 1.5rem;
+
+      h3 {
+        font-size: 1.3rem;
+        color: #444;
+        margin-bottom: 0.5rem;
+      }
+
+      ul {
+        list-style: disc inside;
+        padding-left: 1rem;
+
+        .news-item {
+          padding: 0.4rem 0;
+          font-size: 1rem;
+          color: #555;
+          transition: 0.3s;
+
+          &:hover {
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+}
