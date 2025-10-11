@@ -3,37 +3,18 @@
 <div *ngIf="message" class="message">{{ message }}</div>
 
 <h2>Вести по категорија</h2>
-<div *ngFor="let category of newsByCategory | keyvalue">
+<div *ngFor="let category of newsByCategory | keyvalue" class="category-section">
   <h3>{{ category.key }}</h3>
-  <ul>
-    <li *ngFor="let news of category.value">
+  <div class="news-cards">
+    <div class="news-card" *ngFor="let news of category.value" [ngClass]="category.key.toLowerCase()">
       <a [routerLink]="['/news', news.id]">
-        {{ news.title }} - {{ news.author }} ({{ news.publishDate | date:'mediumDate' }})
+        <h4>{{ news.title }}</h4>
+        <p>{{ news.content | slice:0:120 }}...</p>
+        <div class="news-meta">
+          <span>Автор: {{ news.author }}</span>
+          <span>{{ news.publishDate | date:'mediumDate' }}</span>
+        </div>
       </a>
-    </li>
-  </ul>
-</div>
-
-<h2>Вести по автор</h2>
-<div *ngFor="let author of newsByAuthor | keyvalue">
-  <h3>{{ author.key }}</h3>
-  <ul>
-    <li *ngFor="let news of author.value">
-      <a [routerLink]="['/news', news.id]">
-        {{ news.title }} - {{ news.category }} ({{ news.publishDate | date:'mediumDate' }})
-      </a>
-    </li>
-  </ul>
-</div>
-
-<h2>Вести по месец и година</h2>
-<div *ngFor="let month of newsByMonthYear | keyvalue">
-  <h3>{{ month.key }}</h3>
-  <ul>
-    <li *ngFor="let news of month.value">
-      <a [routerLink]="['/news', news.id]">
-        {{ news.title }} - {{ news.author }} ({{ news.category }})
-      </a>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>
