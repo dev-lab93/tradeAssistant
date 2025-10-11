@@ -1,40 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [CommonModule, FormsModule, RouterModule]
+  imports: [CommonModule, FormsModule, RouterModule, NavbarComponent]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   email = '';
   password = '';
   message = '';
+  loading = false;
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  ngOnInit() {
-    if (this.auth.isLoggedIn()) {
-      // Ако е најавен, врати се на претходната страна
-      this.router.navigateByUrl(document.referrer || '/dashboard');
-    }
-  }
-
   onSubmit() {
+    if (this.loading) return;
+    this.loading = true;
+    this.message = '';
+
     this.auth.login({ email: this.email, password: this.password }).subscribe({
       next: (res) => {
         this.auth.saveToken(res.access_token);
         this.message = '✅ Успешна најава!';
-        this.router.navigate(['/dashboard']); // по успешна најава, default на dashboard
+        this.loading = false;
+        if (this.auth.isLoggedIn()) {
+          this.router.navigate(['/dashboard']);
+        }
       },
       error: () => {
         this.message = '❌ Неточни податоци.';
+        this.loading = false;
       },
     });
   }
