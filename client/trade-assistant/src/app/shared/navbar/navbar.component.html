@@ -6,6 +6,14 @@
     <li><a routerLink="/about">За нас</a></li>
     <li><a routerLink="/services">Наши услуги</a></li>
     <li><a routerLink="/contact">Контакт</a></li>
-    <li><a routerLink="/auth/login">Најава</a></li>
+
+    <ng-container *ngIf="!auth.isLoggedIn(); else loggedIn">
+      <li><a routerLink="/auth/login">Најава</a></li>
+    </ng-container>
+
+    <ng-template #loggedIn>
+       <li><span routerLink="/dashboard">Уредник</span></li>
+      <li><a (click)="logout()">Одјави се</a></li>
+    </ng-template>
   </ul>
 </nav>

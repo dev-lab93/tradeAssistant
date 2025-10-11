@@ -1,22 +1,22 @@
 .news-cards {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); // 4 колони
+  grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
   margin-bottom: 2rem;
 
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(5, 1fr); // 3 колони на поголеми таблети
+    grid-template-columns: repeat(5, 1fr);
   }
 
   @media (max-width: 900px) {
-    grid-template-columns: repeat(3, 1fr); // 2 колони на мали таблети/големи телефони
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @media (max-width: 550px) {
-    grid-template-columns: 3fr; // 1 колона на телефони
+    grid-template-columns: 3fr;
   }
    @media (max-width: 300px) {
-    grid-template-columns: 2fr; // 1 колона на телефони
+    grid-template-columns: 2fr; 
   }
 }
 
