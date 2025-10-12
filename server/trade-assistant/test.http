@@ -34,13 +34,13 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "nikola.moderator@bees.mk",
+  "email": "marija.admin@example.com",
   "password": "supersecret"
 }
 
 ### Use JWT to access protected route
 GET http://localhost:3000/news/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6Im5pa29sYS5tb2RlcmF0b3JAYmVlcy5tayIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjAxOTQwODksImV4cCI6MTc2MDI4MDQ4OX0.-hlLTvd1OswDpBsSMP3FWqWQ3gG9FFkWH2gOmlmLzlA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDIxMDc5MiwiZXhwIjoxNzYwMjk3MTkyfQ._74m76iGsjlg6Q3X7qELK2D0y_GflwrbNrXOs8hwfag
 
 ### 🔹 2. Земи ги сите корисници### 🔹 2. Земи ги сите корисници
 
@@ -113,22 +113,23 @@ GET http://localhost:3000/api/users/2/summary
 ###
 
 POST http://localhost:3000/news
-Authorization: Bearer <mytoken>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDIxMDc5MiwiZXhwIjoxNzYwMjk3MTkyfQ._74m76iGsjlg6Q3X7qELK2D0y_GflwrbNrXOs8hwfag
 Content-Type: application/json
 
 
 {
   "title": "NestJS нови модули",
   "content": "NestJS воведува нови модули за подобра интеграција со микросервиси.",
-  "author": "Admin",
-  "publishDate": "2025-10-10T15:30:00Z"
+  "author": "Мајкл",
+  "publishDate": "2025-10-10T15:30:00Z",
+  "category": "Спорт"
 }
 
 
 ###
 
-DELETE http://localhost:3000/products/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NSwiZXhwIjoxNzYwMTg0MTg1fQ.WP8xrJmvjJkoVGcGPxk61oGl_kKkuaRa2bI4lLV67ac
+DELETE http://localhost:3000/news/11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDIxMDc5MiwiZXhwIjoxNzYwMjk3MTkyfQ._74m76iGsjlg6Q3X7qELK2D0y_GflwrbNrXOs8hwfag
 Content-Type: application/json
 
 
@@ -161,7 +162,7 @@ Content-Type: application/json
 
 
 ### 1️⃣ CREATE News
-GET http://localhost:3000/news
+POST http://localhost:3000/news
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6Im5pa29sYS5tb2RlcmF0b3JAYmVlcy5tayIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjAxOTQwODksImV4cCI6MTc2MDI4MDQ4OX0.-hlLTvd1OswDpBsSMP3FWqWQ3gG9FFkWH2gOmlmLzlA
 Content-Type: application/json
 
