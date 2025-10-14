@@ -163,8 +163,7 @@ Content-Type: application/json
 
 ### 1️⃣ CREATE News
 POST http://localhost:3000/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIxLCJlbWFpbCI6Im5pa29sYS5tb2RlcmF0b3JAYmVlcy5tayIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjAxOTQwODksImV4cCI6MTc2MDI4MDQ4OX0.-hlLTvd1OswDpBsSMP3FWqWQ3gG9FFkWH2gOmlmLzlA
-Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDQ3NTM0OCwiZXhwIjoxNzYwNTYxNzQ4fQ.S36wLlWBxPaKmgKZZPRKUxG5BSoP8ZFxu39if1zvr2o
 
 {
   "title": "NestJS 2025 Release",
