@@ -15,8 +15,6 @@ import { ProductsService, Product } from '../../services/product.service';
 export class HomeComponent implements OnInit {
   newsList: any[] = [];
   newsByCategory: { [key: string]: any[] } = {};
-  newsByAuthor: { [key: string]: any[] } = {};
-  newsByMonthYear: { [key: string]: any[] } = {};
 
   productsList: Product[] = [];
   message = '';
@@ -36,8 +34,6 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         this.newsList = res;
         this.newsByCategory = this.homepageService.groupByCategory(this.newsList);
-        this.newsByAuthor = this.homepageService.groupByAuthor(this.newsList);
-        this.newsByMonthYear = this.homepageService.groupByMonthYear(this.newsList);
       },
       error: () => this.message = '❌ Грешка при вчитување на вести'
     });
