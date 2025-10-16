@@ -9,7 +9,7 @@ async function bootstrap() {
 
   // ✅ Enable CORS
   app.enableCors({
-    origin: 'http://localhost:4200', // Angular app URL
+    origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
@@ -19,10 +19,13 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,      // removes unexpected fields
       transform: true,      // auto transforms payloads into DTO instances
-      forbidNonWhitelisted: false, // optional
+      forbidNonWhitelisted: false,
     }),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  // ✅ Important for Koyeb deployment
+  const port = process.env.PORT || 3000;
+  await app.listen(port, '0.0.0.0');
+  console.log(`🚀 Server is running on http://0.0.0.0:${port}`);
 }
 bootstrap();
