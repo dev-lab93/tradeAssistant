@@ -7,7 +7,7 @@ import { Observable, map } from 'rxjs';
 })
 export class HomepageService {
 
-  private baseUrl = 'http://localhost:3000/news';
+  private baseUrl = 'https://tradeassistant.onrender.com/news';
 
   constructor(private http: HttpClient) {}
 

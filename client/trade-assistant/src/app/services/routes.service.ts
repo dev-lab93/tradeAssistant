@@ -13,8 +13,8 @@ export class RoutesService {
     throw new Error('Method not implemented.');
   }
   private baseUrls: Record<RouteType, string> = {
-    news: 'http://localhost:3000/news',
-    products: 'http://localhost:3000/products',
+    news: 'https://tradeassistant.onrender.com/news',
+    products: 'https://tradeassistant.onrender.com/products',
   };
 
   constructor(private http: HttpClient, private auth: AuthService) {}

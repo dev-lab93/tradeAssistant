@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth/login';
+  private apiUrl = 'https://tradeassistant.onrender.com/auth/login';
 
   constructor(private http: HttpClient) {}
 

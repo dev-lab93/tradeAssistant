@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../environments/environment';
 
 export interface News {
   id?: number;
@@ -16,7 +17,7 @@ export interface News {
   providedIn: 'root'
 })
 export class NewsService {
-  private baseUrl = 'http://localhost:3000/news';
+  private baseUrl = `${environment.apiUrl}/news`;
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 
