@@ -1,12 +1,12 @@
+/* Вести */
 .news-cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem;
-  margin: 0 1rem 1rem;
-  margin-bottom: 2rem;
+  margin: 0 1rem 2rem;
 
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   @media (max-width: 900px) {
@@ -14,13 +14,13 @@
   }
 
   @media (max-width: 550px) {
-    grid-template-columns: 3fr;
+    grid-template-columns: 1fr;
   }
-   @media (max-width: 300px) {
-    grid-template-columns: 2fr;
+
+  @media (max-width: 300px) {
+    grid-template-columns: 1fr;
   }
 }
-
 
 .news-card {
   background: #fff;
@@ -57,7 +57,6 @@
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
 
-  // Пример бои по категорија
   &.technology { border-top: 4px solid #4caf50; }
   &.sports { border-top: 4px solid #2196f3; }
   &.politics { border-top: 4px solid #f44336; }
@@ -73,5 +72,53 @@
     color: #333;
     border-bottom: 2px solid #eee;
     padding-bottom: 0.3rem;
+  }
+}
+
+/* Продукти */
+.products-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+  margin: 0 1rem 2rem;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 550px) {
+    grid-template-columns: 1fr;
+  }
+
+  @media (max-width: 300px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { HomepageService } from '../../services/homepage.service';
+import { ProductsService, Product } from '../../services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -16,12 +17,18 @@ export class HomeComponent implements OnInit {
   newsByCategory: { [key: string]: any[] } = {};
   newsByAuthor: { [key: string]: any[] } = {};
   newsByMonthYear: { [key: string]: any[] } = {};
+
+  productsList: Product[] = [];
   message = '';
 
-  constructor(private homepageService: HomepageService) {}
+  constructor(
+    private homepageService: HomepageService,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit() {
     this.loadNews();
+    this.loadProducts();
   }
 
   loadNews() {
@@ -33,6 +40,16 @@ export class HomeComponent implements OnInit {
         this.newsByMonthYear = this.homepageService.groupByMonthYear(this.newsList);
       },
       error: () => this.message = '❌ Грешка при вчитување на вести'
+    });
+  }
+
+  loadProducts() {
+    this.productsService.getAll().subscribe({
+      next: (res: any) => {
+        // Backend враќа { items: [...] } или директно масив
+        this.productsList = Array.isArray(res) ? res : res.items ? res.items : [];
+      },
+      error: () => this.message = '❌ Грешка при вчитување на продукти'
     });
   }
 }

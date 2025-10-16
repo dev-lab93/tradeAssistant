@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsI
 
 
 ### Login and get JWT
-POST http://localhost:3000/auth/login
+POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
@@ -112,18 +112,23 @@ GET http://localhost:3000/api/users/2/summary
 
 ###
 
-POST http://localhost:3000/news
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDIxMDc5MiwiZXhwIjoxNzYwMjk3MTkyfQ._74m76iGsjlg6Q3X7qELK2D0y_GflwrbNrXOs8hwfag
+### Create new product
+POST http://localhost:8080/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibWFyaWphLmFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzYwNjI5MzQ0LCJleHAiOjE3NjA3MTU3NDR9.rmpEdwTyfSy2AawcrZtZQ_auRYF_Y_kuC7XFHHkzhOk
 Content-Type: application/json
 
-
 {
-  "title": "NestJS нови модули",
-  "content": "NestJS воведува нови модули за подобра интеграција со микросервиси.",
-  "author": "Мајкл",
-  "publishDate": "2025-10-10T15:30:00Z",
-  "category": "Спорт"
+  "name": "NestJS нови модули",
+  "category": "other",
+  "quantity": 10,
+  "distributor": "NestJS воведува нови модули за подобра интеграција со микросервиси.",
+  "entryDate": "2002-12-12",
+  "expirationDate": "2025-12-12",
+  "purchasePrice": 50,
+  "salePrice": 80,
+  "barcode": "121313d"
 }
+
 
 
 ###

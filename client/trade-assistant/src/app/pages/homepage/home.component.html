@@ -18,3 +18,14 @@
     </div>
   </div>
 </div>
+
+<h2>Продукти</h2>
+<div class="products-cards">
+  <div class="product-card" *ngFor="let product of productsList">
+    <h4>{{ product.name }}</h4>
+    <p>Категорија: {{ product.category }}</p>
+    <p>Количина: {{ product.quantity }}</p>
+    <p *ngIf="product.salePrice">Цена: {{ product.salePrice | currency:'MKD' }}</p>
+    <p *ngIf="product.expirationDate">Истекува: {{ product.expirationDate | date:'mediumDate' }}</p>
+  </div>
+</div>
