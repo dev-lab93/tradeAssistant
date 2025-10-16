@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../environments/environment';
 
 type RouteType = 'news' | 'products' ; // можеш да додадеш trades
 
@@ -13,8 +14,8 @@ export class RoutesService {
     throw new Error('Method not implemented.');
   }
   private baseUrls: Record<RouteType, string> = {
-    news: 'https://tradeassistant.onrender.com/news',
-    products: 'https://tradeassistant.onrender.com/products',
+    news: `${environment.apiUrl}/news`,
+    products: `${environment.apiUrl}/products`,
   };
 
   constructor(private http: HttpClient, private auth: AuthService) {}

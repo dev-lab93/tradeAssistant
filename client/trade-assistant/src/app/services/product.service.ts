@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../environments/environment';
 
 export interface Product {
   id?: number;
@@ -20,7 +21,7 @@ export interface Product {
   providedIn: 'root'
 })
 export class ProductsService {
-  private baseUrl = 'https://tradeassistant.onrender.com/products';
+  private baseUrl = `${environment.apiUrl}/products`;
 
   constructor(private http: HttpClient, private auth: AuthService) {}
 

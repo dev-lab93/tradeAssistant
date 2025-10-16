@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomepageService {
 
-  private baseUrl = 'https://tradeassistant.onrender.com/news';
+  private baseUrl = `${environment.apiUrl}/news`;
 
   constructor(private http: HttpClient) {}
 

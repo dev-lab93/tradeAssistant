@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://tradeassistant.onrender.com' // backend URL за production
+  production: false,
+  apiUrl: 'http://localhost:3000' // backend URL за dev
 };
