@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Controller, Get, Param, UseGuards, Request, UseInterceptors, UnauthorizedException, Delete } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards, Request, UseInterceptors, UnauthorizedException, Delete, Logger } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ExcludePasswordInterceptor } from '../interceptors/exclude-password.interceptor';
@@ -8,7 +9,19 @@ import { ExcludePasswordInterceptor } from '../interceptors/exclude-password.int
 @UseInterceptors(ExcludePasswordInterceptor)
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  private readonly logger = new Logger(UsersController.name);
+
+  constructor(private readonly usersService: UsersService) {}
+
+  // ✅ helper function за валидација на ID со логирање
+  private validateId(id: string | number, context: string): number {
+    const userId = typeof id === 'string' ? Number(id) : id;
+    if (!userId || isNaN(userId)) {
+      this.logger.warn(`Invalid ID detected in ${context}: ${id}`);
+      throw new UnauthorizedException('Invalid user ID');
+    }
+    return userId;
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -19,22 +32,21 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getUser(@Param('id') id: string) {
-    const userId = Number(id);
-    if (isNaN(userId)) throw new UnauthorizedException('Invalid user ID');
+    const userId = this.validateId(id, 'getUser');
     return this.usersService.findById(userId);
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async removeUser(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    const userId = this.validateId(id, 'removeUser');
+    return this.usersService.remove(userId);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('profile/me')
   async getProfile(@Request() req) {
-    const userId = Number(req.user?.id);
-    if (!userId || isNaN(userId)) throw new UnauthorizedException('Invalid user in token');
+    const userId = this.validateId(req.user?.id, 'getProfile');
     return this.usersService.findById(userId);
   }
 }

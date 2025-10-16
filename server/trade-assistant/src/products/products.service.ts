@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike, Between } from 'typeorm';
-import { Product } from '../entities/product.entity';
+import { Product, ProductCategory } from '../entities/product.entity';
 import { CreateProductDto } from '../dto/product/create-product.dto';
 import { UpdateProductDto } from '../dto/product/update-product.dto';
 
@@ -16,9 +17,14 @@ export class ProductsService {
   ) {}
 
   async create(createDto: CreateProductDto): Promise<Product> {
-    const product = this.productRepo.create(createDto);
-    return this.productRepo.save(product);
+  // ✅ Проверка дали category е валидна
+  if (!Object.values(ProductCategory).includes(createDto.category as ProductCategory)) {
+    throw new BadRequestException(`Invalid category: ${createDto.category}`);
   }
+
+  const product = this.productRepo.create(createDto);
+  return this.productRepo.save(product);
+}
 
   async findAll(query?: {
     search?: string;

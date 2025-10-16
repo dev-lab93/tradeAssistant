@@ -11,13 +11,11 @@ import { Roles } from '../auth/roles.decorator';
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   findAll(@Query('search') search?: string, @Query('page') page?: number, @Query('limit') limit?: number) {
     return this.newsService.findAll({ search, page: Number(page), limit: Number(limit) });
   }
 
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.newsService.findOne(id);
