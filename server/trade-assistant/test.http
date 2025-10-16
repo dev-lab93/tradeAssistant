@@ -1,5 +1,5 @@
 ### 🔹 1. Креирај нов корисник
-POST http://localhost:3000/auth/register
+POST http://localhost:3000/auth/create-admin
 Content-Type: application/json
 
 {
