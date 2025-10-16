@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { NewsModule } from './news/news.module';
+
 @Module({
   imports: [
     // 📦 .env конфигурација
@@ -17,17 +18,21 @@ import { NewsModule } from './news/news.module';
     // 🗄️ TypeORM конфигурација (PostgreSQL)
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
+      inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
         host: config.get<string>('DB_HOST'),
-        port: config.get<number>('DB_PORT'),
+        port: 5432,
         username: config.get<string>('DB_USERNAME'),
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
-        autoLoadEntities: true, // автоматски ги вчитува сите entity класи
-        synchronize: true, // ❗ за продукција постави на false
+        autoLoadEntities: true,
+        synchronize: true, // ❗ на production стај false
+        ssl:
+          config.get<string>('DB_SSL') === 'true'
+            ? { rejectUnauthorized: false }
+            : false,
       }),
-      inject: [ConfigService],
     }),
 
     // 📚 Модули на апликацијата
