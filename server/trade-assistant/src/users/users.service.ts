@@ -1,16 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import {
-  Injectable,
-  NotFoundException,
-  ConflictException,
-  BadRequestException,
-} from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Injectable, ConflictException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
-import * as bcrypt from 'bcrypt';
 import { UserRole } from './user-role.enum';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -19,69 +13,37 @@ export class UsersService {
     private usersRepo: Repository<User>,
   ) {}
 
-  async create(
-    name: string,
-    email: string,
-    plainPassword: string,
-    phone?: string,
-    role?: UserRole,
-  ) {
-    if (!email || !plainPassword) {
-      throw new BadRequestException('Email and password are required');
-    }
-
-    const existing = await this.usersRepo.findOne({ where: { email } });
-    if (existing) throw new ConflictException('Email already in use');
-
-    const salt = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(plainPassword, salt);
-
-    const user = this.usersRepo.create({
-      name,
-      email,
-      password: hashed,
-      phone,
-      role: role ?? UserRole.USER,
-    });
-
-    const saved = await this.usersRepo.save(user);
-    const { password, ...result } = saved;
-    return result;
+  async findByEmail(email: string): Promise<User | null> {
+    return this.usersRepo.findOne({ where: { email } });
   }
 
-  async findAll() {
-    return this.usersRepo.find();
-  }
-
-  async findByEmail(email: string) {
-  if (!email) {
-    throw new BadRequestException('Email is required');
-  }
-
-  const user = await this.usersRepo.findOne({ where: { email } });
-  if (!user) {
-    throw new NotFoundException(`User with email ${email} not found`);
-  }
-
-  return user;
+  async findAll(): Promise<User[]> {
+  return this.usersRepo.find();
 }
 
-  async findById(id: number) {
-    if (!id) throw new NotFoundException('Invalid user id');
+  async findById(id: number): Promise<User> {
     const user = await this.usersRepo.findOne({ where: { id } });
     if (!user) throw new NotFoundException('User not found');
     return user;
   }
 
-  async update(id: number, attrs: Partial<Omit<User, 'id' | 'password'>>) {
-    const user = await this.findById(id);
-    Object.assign(user, attrs);
+  async create(
+    name: string,
+    email: string,
+    password: string,
+    phone?: string,
+    role?: UserRole,
+  ): Promise<User> {
+    const existingUser = await this.findByEmail(email);
+    if (existingUser) throw new ConflictException('User with this email already exists');
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const user = this.usersRepo.create({ name, email, password: hashedPassword, phone, role });
     return this.usersRepo.save(user);
   }
 
-  async remove(id: number) {
-    const user = await this.findById(id);
+  async remove(id: number): Promise<{ message: string }> {
     await this.usersRepo.delete(id);
-    return { deleted: true };
+    return { message: 'User deleted successfully' };
   }
 }
