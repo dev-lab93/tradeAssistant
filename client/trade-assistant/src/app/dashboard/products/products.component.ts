@@ -16,9 +16,12 @@ export class ProductsComponent implements OnInit {
   productsList: Product[] = [];
   message = '';
 
-  // ⚠️ Овде исправено: користиме Product полја
+  // Нов продукт за додавање
   newProduct: Product = { name: '', category: '', quantity: 0 };
-  products: any;
+
+  // За edit
+  editingProductId: number | null = null;
+  editedProduct: Product = { name: '', category: '', quantity: 0 };
 
   constructor(private productsService: ProductsService, private router: Router) {}
 
@@ -27,9 +30,12 @@ export class ProductsComponent implements OnInit {
   }
 
   loadProducts() {
-    this.productsService.getAll().subscribe((res: any) => {
-    this.products = res.items; // now this.products is an array
-  });
+    this.productsService.getAll().subscribe({
+      next: (res: any) => {
+        this.productsList = Array.isArray(res.items) ? res.items : res; // ако API враќа директно array
+      },
+      error: () => this.message = '❌ Грешка при вчитување на продукти'
+    });
   }
 
   addProduct() {
@@ -47,6 +53,29 @@ export class ProductsComponent implements OnInit {
     this.productsService.delete(id).subscribe({
       next: () => this.loadProducts(),
       error: () => this.message = '❌ Грешка при бришење на продукт'
+    });
+  }
+
+  // --- Edit функции ---
+  startEdit(product: Product) {
+    this.editingProductId = product.id!;
+    this.editedProduct = { ...product };
+  }
+
+  cancelEdit() {
+    this.editingProductId = null;
+    this.editedProduct = { name: '', category: '', quantity: 0 };
+  }
+
+  saveEdit() {
+    if (!this.editingProductId) return;
+    this.productsService.update(this.editingProductId, this.editedProduct).subscribe({
+      next: () => {
+        this.message = '✅ Продуктот е успешно изменет!';
+        this.loadProducts();
+        this.cancelEdit();
+      },
+      error: () => this.message = '❌ Грешка при изменување на продукт'
     });
   }
 

@@ -1,5 +1,6 @@
 <button (click)="logout()">Logout</button>
 
+<!-- Додавање нов продукт -->
 <div class="add-product-form">
   <h3>Додај Продукт</h3>
   <input [(ngModel)]="newProduct.name" placeholder="Име на продукт" />
@@ -17,16 +18,39 @@
 
 <hr />
 
+<!-- Листа на продукти со edit -->
 <div class="product-list">
   <h3>Листа на Продукти</h3>
-  <div *ngFor="let product of products">
-    <h4>{{ product.name }}</h4>
-    <p>Категорија: {{ product.category }}</p>
-    <p>Количина: {{ product.quantity }}</p>
-    <p>Дистрибутер: {{ product.distributor }}</p>
-    <p>Внесено: {{ product.entryDate }} | Истек: {{ product.expirationDate }}</p>
-    <p>Цена купување: {{ product.purchasePrice }} | Цена продажба: {{ product.salePrice }}</p>
-    <p>Баркод: {{ product.barcode }}</p>
-    <button *ngIf="product.id !== undefined" (click)="deleteProduct(product.id!)">Избриши</button>
+<div *ngFor="let product of productsList">
+
+    <!-- Ако продуктот е во edit режим -->
+    <div *ngIf="editingProductId === product.id; else viewMode">
+      <input [(ngModel)]="editedProduct.name" placeholder="Име на продукт" />
+      <input [(ngModel)]="editedProduct.category" placeholder="Категорија" />
+      <input [(ngModel)]="editedProduct.quantity" type="number" placeholder="Количина" />
+      <input [(ngModel)]="editedProduct.distributor" placeholder="Дистрибутер" />
+      <input [(ngModel)]="editedProduct.entryDate" type="date" placeholder="Датум на внесување" />
+      <input [(ngModel)]="editedProduct.expirationDate" type="date" placeholder="Датум на истек" />
+      <input [(ngModel)]="editedProduct.purchasePrice" type="number" placeholder="Цена на купување" />
+      <input [(ngModel)]="editedProduct.salePrice" type="number" placeholder="Цена на продажба" />
+      <input [(ngModel)]="editedProduct.barcode" placeholder="Баркод" />
+
+      <button (click)="saveEdit()">Save</button>
+      <button (click)="cancelEdit()">Cancel</button>
+    </div>
+
+    <!-- View режим -->
+    <ng-template #viewMode>
+      <h4>{{ product.name }}</h4>
+      <p>Категорија: {{ product.category }}</p>
+      <p>Количина: {{ product.quantity }}</p>
+      <p>Дистрибутер: {{ product.distributor }}</p>
+      <p>Внесено: {{ product.entryDate }} | Истек: {{ product.expirationDate }}</p>
+      <p>Цена купување: {{ product.purchasePrice }} | Цена продажба: {{ product.salePrice }}</p>
+      <p>Баркод: {{ product.barcode }}</p>
+      <button *ngIf="product.id !== undefined" (click)="deleteProduct(product.id!)">Избриши</button>
+      <button *ngIf="product.id !== undefined" (click)="startEdit(product)">Edit</button>
+    </ng-template>
+
   </div>
 </div>

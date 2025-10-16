@@ -15,23 +15,17 @@ import { Router } from '@angular/router';
 export class NewsComponent implements OnInit {
   newsList: any[] = [];
   message = '';
-  newNews = {
-    title: '',
-    content: '',
-    author: '',
-    publishDate: '',
-    category: ''
-  };
+  newNews = { title: '', content: '', author: '', publishDate: '', category: '' };
 
-  constructor(
-    private routesService: RoutesService,
-    private router: Router  // <-- инјектирање на Router
-  ) {}
+  // За edit
+  editingNewsId: number | null = null;
+  editedNews: any = {};
+
+  constructor(private routesService: RoutesService, private router: Router) {}
 
   ngOnInit() {
     this.loadNews();
   }
-
 
   loadNews() {
     this.routesService.getAll('news').subscribe({
@@ -60,8 +54,32 @@ export class NewsComponent implements OnInit {
       error: () => this.message = '❌ Грешка при бришење на вест'
     });
   }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/auth/login']);
+  }
+
+  // Edit методи
+  startEdit(news: any) {
+    this.editingNewsId = news.id!;
+    this.editedNews = { ...news }; // копија за edit
+  }
+
+  cancelEdit() {
+    this.editingNewsId = null;
+    this.editedNews = {};
+  }
+
+  saveEdit() {
+    if (!this.editingNewsId) return;
+    this.routesService.update('news', this.editingNewsId, this.editedNews).subscribe({
+      next: () => {
+        this.message = '✅ Веста е успешно изменета!';
+        this.loadNews();
+        this.cancelEdit();
+      },
+      error: () => this.message = '❌ Грешка при изменување на веста'
+    });
   }
 }

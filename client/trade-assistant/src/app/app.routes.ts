@@ -10,6 +10,10 @@ export const routes: Routes = [
 
   // Route за деталите на веста
   { path: 'news/:id', component: ArticleDetailsComponent },
+  {
+  path: 'product/:id',
+  loadComponent: () => import('./pages/product-details/product-details.component').then(m => m.ProductDetailsComponent)
+},
 
   {
     path: 'dashboard',

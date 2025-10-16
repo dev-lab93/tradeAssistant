@@ -12,7 +12,6 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   // 📦 Get all products (with pagination + filters)
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
   findAll(
     @Query('search') search?: string,
@@ -38,7 +37,6 @@ export class ProductsController {
   }
 
   // 🔍 Get single product
-  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.productsService.findOne(id);

@@ -1,4 +1,4 @@
-<button (click)="logout()">Logout</button>
+<button (click)="logout()" class="logout-btn">Logout</button>
 
 <div class="add-news-form">
   <h3>Додај Вест</h3>
@@ -8,17 +8,35 @@
   <input [(ngModel)]="newNews.publishDate" type="date" placeholder="Датум" />
   <input [(ngModel)]="newNews.category" placeholder="Категорија" />
   <button (click)="addNews()">Додај</button>
-  <p>{{ message }}</p>
+  <p class="message">{{ message }}</p>
 </div>
 
 <hr />
 
 <div class="news-list">
   <h3>Листа на Вести</h3>
-  <div *ngFor="let news of newsList">
-    <h4>{{ news.title }}</h4>
-    <p>{{ news.content }}</p>
-    <p>Автор: {{ news.author }} | Датум: {{ news.publishDate | date }}</p>
-    <button *ngIf="news.id !== undefined" (click)="deleteNews(news.id!)">Избриши</button>
+  <div *ngFor="let news of newsList" class="news-item">
+    <div *ngIf="editingNewsId !== news.id">
+      <h4>{{ news.title }}</h4>
+      <p>{{ news.content }}</p>
+      <p>Автор: {{ news.author }} | Датум: {{ news.publishDate | date }}</p>
+      <p>Категорија: {{ news.category }}</p>
+      <div class="actions">
+        <button (click)="startEdit(news)">Edit</button>
+        <button (click)="deleteNews(news.id)">Избриши</button>
+      </div>
+    </div>
+
+    <div *ngIf="editingNewsId === news.id" class="edit-form">
+      <input [(ngModel)]="editedNews.title" placeholder="Наслов" />
+      <textarea [(ngModel)]="editedNews.content" placeholder="Содржина"></textarea>
+      <input [(ngModel)]="editedNews.author" placeholder="Автор" />
+      <input [(ngModel)]="editedNews.publishDate" type="date" placeholder="Датум" />
+      <input [(ngModel)]="editedNews.category" placeholder="Категорија" />
+      <div class="actions">
+        <button (click)="saveEdit()">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </div>
+    </div>
   </div>
 </div>
