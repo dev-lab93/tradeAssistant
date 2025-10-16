@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { NewsModule } from './news/news.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -27,7 +29,7 @@ import { NewsModule } from './news/news.module';
         password: config.get<string>('DB_PASSWORD'),
         database: config.get<string>('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: true, // ❗ на production стај false
+        synchronize: true, // ❗ production -> false
         ssl:
           config.get<string>('DB_SSL') === 'true'
             ? { rejectUnauthorized: false }
@@ -41,5 +43,7 @@ import { NewsModule } from './news/news.module';
     ProductsModule,
     NewsModule,
   ],
+  controllers: [AppController], // 👈 додади го ова
+  providers: [AppService], // 👈 и ова
 })
 export class AppModule {}
