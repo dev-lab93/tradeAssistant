@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+  BadRequestException,
+} from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
@@ -9,49 +14,57 @@ import { UserRole } from './user-role.enum';
 
 @Injectable()
 export class UsersService {
-  findOne(id: number) {
-    throw new Error('Method not implemented.');
-  }
   constructor(
     @InjectRepository(User)
     private usersRepo: Repository<User>,
-  ) { }
+  ) {}
 
-  // users.service.ts
   async create(
-  name: string,
-  email: string,
-  plainPassword: string,
-  phone?: string,
-  role?: UserRole,
-) {
-  const existing = await this.usersRepo.findOne({ where: { email } });
-  if (existing) throw new ConflictException('Email already in use');
+    name: string,
+    email: string,
+    plainPassword: string,
+    phone?: string,
+    role?: UserRole,
+  ) {
+    if (!email || !plainPassword) {
+      throw new BadRequestException('Email and password are required');
+    }
 
-  const salt = await bcrypt.genSalt(10);
-  const hashed = await bcrypt.hash(plainPassword, salt);
+    const existing = await this.usersRepo.findOne({ where: { email } });
+    if (existing) throw new ConflictException('Email already in use');
 
-  const user = this.usersRepo.create({
-    name,
-    email,
-    password: hashed,
-    phone,
-    role: role ?? UserRole.USER,
-  });
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(plainPassword, salt);
 
-  const saved = await this.usersRepo.save(user);
-  const { password, ...result } = saved;
-  return result;
-}
+    const user = this.usersRepo.create({
+      name,
+      email,
+      password: hashed,
+      phone,
+      role: role ?? UserRole.USER,
+    });
 
+    const saved = await this.usersRepo.save(user);
+    const { password, ...result } = saved;
+    return result;
+  }
 
   async findAll() {
     return this.usersRepo.find();
   }
 
   async findByEmail(email: string) {
-    return this.usersRepo.findOne({ where: { email } });
+  if (!email) {
+    throw new BadRequestException('Email is required');
   }
+
+  const user = await this.usersRepo.findOne({ where: { email } });
+  if (!user) {
+    throw new NotFoundException(`User with email ${email} not found`);
+  }
+
+  return user;
+}
 
   async findById(id: number) {
     if (!id) throw new NotFoundException('Invalid user id');

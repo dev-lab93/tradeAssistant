@@ -1,6 +1,7 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { News } from '../entities/news.entity';
@@ -15,7 +16,19 @@ export class NewsService {
   ) {}
 
   async create(dto: CreateNewsDto): Promise<News> {
-    const news = this.newsRepo.create(dto);
+    if (!dto.title || dto.title.trim() === '') {
+      throw new BadRequestException('Title is required');
+    }
+
+    if (!dto.content || dto.content.trim() === '') {
+      throw new BadRequestException('Content is required');
+    }
+
+    const news = this.newsRepo.create({
+      ...dto,
+      publishDate: dto.publishDate ?? new Date(), // ако нема, става денешен датум
+    });
+
     return this.newsRepo.save(news);
   }
 

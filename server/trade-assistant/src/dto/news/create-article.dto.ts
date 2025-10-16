@@ -14,4 +14,8 @@ export class CreateNewsDto {
   @IsOptional()
   @IsDateString()
   publishDate?: string;
+
+  @IsOptional()
+  @IsString()
+  category?: string;
 }
