@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { IsString, IsOptional, IsDateString } from 'class-validator';
 
 export class CreateNewsDto {
@@ -6,6 +7,10 @@ export class CreateNewsDto {
 
   @IsString()
   content: string;
+  
+  @IsString()
+  @IsOptional()
+  image?: string;
 
   @IsOptional()
   @IsString()

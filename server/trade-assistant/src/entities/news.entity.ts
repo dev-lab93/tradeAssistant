@@ -13,6 +13,9 @@ export class News {
   content: string;
 
   @Column({ nullable: true })
+  image?: string;
+
+  @Column({ nullable: true })
   author?: string;
 
   @Column({ type: 'date', nullable: true })

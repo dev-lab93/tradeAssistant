@@ -2,12 +2,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export enum ProductCategory {
-  ALCOHOL = 'alcohol',
-  JUICE = 'juice',
-  WATER = 'water',
-  ENERGY = 'energy',
-  FOOD = 'food',
-  HOUSEHOLD = 'household',
+  ONEWEEK = 'oneweek',
+  ONEMONTH = 'onemonth',
+  ONEYEAR = 'oneyear',
   OTHER = 'other',
 }
 
