@@ -1,5 +1,8 @@
+/* eslint-disable prettier/prettier */
 export interface ForexApiResponse {
-  base: string;
-  rates: Record<string, number>;
-  date?: string; // ако API-то враќа date
+  success: boolean;               // дали fetch е успешен
+  base: string;                   // базна валута, нпр. "USD"
+  timestamp: number;              // UNIX timestamp кога се земени податоците
+  rates: Record<string, number>;  // курсеви, динамичен објект
+  date?: string;                  // опционално, ако API-то враќа date
 }

@@ -233,3 +233,10 @@ Authorization: Bearer <JWT_TOKEN>
 ### 6️⃣ SEARCH News by Category
 GET http://localhost:3000/news?search=technology&page=1&limit=10
 Authorization: Bearer <JWT_TOKEN>
+
+
+
+
+###
+
+GET http://localhost:3000/forex/fetch

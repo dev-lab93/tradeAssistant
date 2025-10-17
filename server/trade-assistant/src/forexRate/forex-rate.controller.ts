@@ -1,7 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Controller, Get, Post, Body, Delete, Param, ParseIntPipe } from '@nestjs/common';
 import { ForexRateService } from './forex-rate.service';
-import { ForexAnalysisService } from './forex-analysis.service';
+import { ForexAnalysisService, DailyAnalysis } from './forex-analysis.service';
 import { ForexFetchService } from './forex-fetch.service';
+import { CreateForexRateDto } from './dto/create-forex-rate.dto';
 
 @Controller('forex')
 export class ForexRateController {
@@ -12,7 +14,7 @@ export class ForexRateController {
   ) {}
 
   @Get('fetch')
-  async manualFetch() {
+  async manualFetch(): Promise<{ message: string }> {
     await this.forexFetchService.fetchAndSave();
     return { message: 'Forex rates fetched manually ✅' };
   }
@@ -28,7 +30,23 @@ export class ForexRateController {
   }
 
   @Get('trends')
-  async analyzeTrends() {
-    return this.forexAnalysisService.analyzeTrends();
+  async analyzeTrends(): Promise<DailyAnalysis | null> {
+    return this.forexAnalysisService.analyzeDailyTrends();
+  }
+
+  // **Внесување на курсеви рачно**
+  @Post('create')
+  async create(@Body() dto: CreateForexRateDto) {
+    const record = {
+      ...dto,
+      timestamp: dto['timestamp'] ?? Math.floor(Date.now() / 1000),
+    };
+    return this.forexRateService.create(record);
+  }
+
+  // **Бришење по id**
+  @Delete('delete/:id')
+  async deleteById(@Param('id', ParseIntPipe) id: number) {
+    return this.forexRateService.deleteById(id);
   }
 }

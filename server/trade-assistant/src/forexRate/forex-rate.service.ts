@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -12,15 +13,33 @@ export class ForexRateService {
   ) {}
 
   async create(dto: CreateForexRateDto) {
-    const record = this.forexRepository.create(dto);
-    return this.forexRepository.save(record);
-  }
+  const record = this.forexRepository.create({
+    ...dto,
+    timestamp: dto.timestamp ?? Math.floor(Date.now() / 1000),
+  });
+  return this.forexRepository.save(record);
+}
+
 
   async findAll() {
     return this.forexRepository.find({ order: { createdAt: 'DESC' } });
   }
 
   async findLatest() {
-    return this.forexRepository.findOne({ order: { createdAt: 'DESC' } });
+  const [latest] = await this.forexRepository.find({
+    order: { createdAt: 'DESC' },
+    take: 1,
+  });
+  return latest;
+}
+
+async deleteById(id: number) {
+  const result = await this.forexRepository.delete(id);
+  if (result.affected === 0) {
+    throw new Error(`Forex rate with id ${id} not found`);
   }
+  return { message: `✅ Forex rate with id ${id} has been deleted.` };
+}
+
+
 }
