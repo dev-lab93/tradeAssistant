@@ -8,6 +8,14 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
+  async update(userId: number, body: any) {
+    const user = await this.findById(userId);
+    if (!user) throw new NotFoundException('User not found');
+
+    // Update user properties
+    Object.assign(user, body);
+    return this.usersRepo.save(user);
+  }
   constructor(
     @InjectRepository(User)
     private usersRepo: Repository<User>,

@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { Controller, Get, Param, UseGuards, Request, UseInterceptors, UnauthorizedException, Delete, Logger } from '@nestjs/common';
+import { Controller, Get, Param, UseGuards, Request, UseInterceptors, UnauthorizedException, Delete, Logger, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ExcludePasswordInterceptor } from '../interceptors/exclude-password.interceptor';
@@ -37,6 +37,12 @@ export class UsersController {
   async getUser(@Param('id') id: string) {
     const userId = this.validateId(id, 'getUser');
     return this.usersService.findById(userId);
+  }
+  @Put(':id')
+  async updateUser(@Param('id') id: string, @Request() req) {
+    const userId = this.validateId(id, 'updateUser');
+    // Дополнителна логика за ажурирање на корисникот може да се додаде овде
+    return this.usersService.update(userId, req.body);
   }
 
   @UseGuards(JwtAuthGuard)
