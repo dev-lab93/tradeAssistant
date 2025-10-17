@@ -35,11 +35,12 @@ export class ForexRateService {
 
 async deleteById(id: number) {
   const result = await this.forexRepository.delete(id);
+
   if (result.affected === 0) {
-    throw new Error(`Forex rate with id ${id} not found`);
+    return { message: `⚠️ Forex rate with id ${id} not found.` };
   }
+
   return { message: `✅ Forex rate with id ${id} has been deleted.` };
 }
-
 
 }
