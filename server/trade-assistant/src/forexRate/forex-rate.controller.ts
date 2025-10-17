@@ -44,7 +44,6 @@ export class ForexRateController {
     return this.forexRateService.create(record);
   }
 
-  // **Бришење по id**
   @Delete('delete/:id')
   async deleteById(@Param('id', ParseIntPipe) id: number) {
     return this.forexRateService.deleteById(id);

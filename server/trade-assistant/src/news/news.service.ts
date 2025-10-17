@@ -26,7 +26,7 @@ export class NewsService {
 
     const news = this.newsRepo.create({
       ...dto,
-      publishDate: dto.publishDate ?? new Date(), // ако нема, става денешен датум
+      publishDate: dto.publishDate ?? new Date(),
     });
 
     return this.newsRepo.save(news);

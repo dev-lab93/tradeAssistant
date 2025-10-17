@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 import { NewsService } from './news.service';
@@ -40,10 +39,10 @@ export class NewsPublishService {
 
             const news: CreateNewsDto = {
                 title: `Анализа на валутите во однос со Американскиот Долар, ден ${todaysDate}`,
-                content: contentLines.join('\n'),
+                content: contentLines.join('\n\n'),
                 image: 'https://images.ctfassets.net/hzjmpv1aaorq/2GG2BaOtWnvcy0odw5QseF/59984c27d5c432170cc7a37b72d6d4b4/Untitled_design__13_.png?q=70',
                 author: 'AutoForexBot',
-                category: 'Forex',
+                category: 'Forex Дневна Анализа',
             };
 
 
