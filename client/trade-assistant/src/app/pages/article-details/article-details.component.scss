@@ -20,3 +20,32 @@
     color: #333;
   }
 }
+
+.content {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #333;
+  white-space: pre-line;
+}
+
+.back-button {
+  display: inline-block;
+  margin: 1rem 0;
+  text-decoration: none;
+  color: #2196f3;
+  font-weight: 500;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #0d47a1;
+  }
+}
+
+.news-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}

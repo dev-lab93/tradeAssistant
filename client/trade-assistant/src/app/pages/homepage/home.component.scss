@@ -19,6 +19,20 @@
   }
 }
 
+.news-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #777;
+
+  i {
+    margin-right: 4px;
+    color: #999;
+  }
+}
+
+
 /* News cards */
 .news-card {
   background: #fff;

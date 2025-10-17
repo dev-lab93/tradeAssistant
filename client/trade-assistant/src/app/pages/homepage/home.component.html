@@ -9,7 +9,9 @@
     <div class="news-card" *ngFor="let news of category.value" [ngClass]="category.key.toLowerCase()">
       <a [routerLink]="['/news', news.id]">
         <h4>{{ news.title }}</h4>
-        <p>{{ news.content | slice:0:120 }}...</p>
+        <img *ngIf="news.imageUrl || news.image" [src]="news.imageUrl || news.image" [alt]="news.title"
+          class="news-image" />
+        <p>{{ news.content | slice:0:200 }}...</p>
         <div class="news-meta">
           <span>Автор: {{ news.author }}</span>
           <span>{{ news.publishDate | date:'mediumDate' }}</span>
@@ -28,8 +30,8 @@
       <p>Quantity: {{ product.quantity }}</p>
       <p *ngIf="product.distributor">Distributor: {{ product.distributor }}</p>
       <p *ngIf="product.entryDate">Added: {{ product.entryDate | date:'mediumDate' }}</p>
-      <p *ngIf="product.purchasePrice">Cost: {{ product.purchasePrice | currency    }}</p>
-      <p *ngIf="product.barcode">Barcode: {{ product.barcode }}</p  >
+      <p *ngIf="product.purchasePrice">Cost: {{ product.purchasePrice | currency }}</p>
+      <p *ngIf="product.barcode">Barcode: {{ product.barcode }}</p>
       <p *ngIf="product.salePrice">Price: {{ product.salePrice | currency }}</p>
       <p *ngIf="product.expirationDate">Expires: {{ product.expirationDate | date:'mediumDate' }}</p>
     </a>
@@ -38,4 +40,3 @@
 <ng-template #noProducts>
   <p>Нема продукти за прикажување</p>
 </ng-template>
-
