@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/require-await */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Injectable, ConflictException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';

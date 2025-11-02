@@ -6,6 +6,10 @@ export class CreateProductDto {
   @IsString()
   name: string;
 
+  @IsOptional()
+  @IsString()
+  image: string;
+
   @IsEnum(ProductCategory)
   category: ProductCategory;
 

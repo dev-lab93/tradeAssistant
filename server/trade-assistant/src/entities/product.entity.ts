@@ -16,6 +16,9 @@ export class Product {
   @Column({ length: 100 })
   name: string;
 
+  @Column({ nullable: true })
+  image?: string;
+
   @Column({
     type: 'enum',
     enum: ProductCategory,

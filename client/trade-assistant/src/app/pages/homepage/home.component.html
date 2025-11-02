@@ -2,7 +2,6 @@
 
 <div *ngIf="message" class="message">{{ message }}</div>
 
-<h2>Вести по категорија</h2>
 <div *ngFor="let category of newsByCategory | keyvalue" class="category-section">
   <h3>{{ category.key }}</h3>
   <div class="news-cards">
