@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
   loadProducts() {
     this.productsService.getAll().subscribe({
       next: (res: any) => {
-        // Backend враќа { items: [...] } или директно масив
         this.productsList = Array.isArray(res) ? res : res.items ? res.items : [];
       },
       error: () => this.message = '❌ Грешка при вчитување на продукти'

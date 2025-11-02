@@ -12,14 +12,12 @@ export class HomepageService {
 
   constructor(private http: HttpClient) {}
 
-  // Преземање на сите вести
   getAllNews(): Observable<any[]> {
     return this.http.get<any>(this.baseUrl).pipe(
       map(res => Array.isArray(res.items) ? res.items : [])
     );
   }
 
-  // Делување по категорија
   groupByCategory(newsList: any[]): { [key: string]: any[] } {
     return newsList.reduce((acc, news) => {
       const category = news.category || 'Unknown';
@@ -29,7 +27,6 @@ export class HomepageService {
     }, {} as { [key: string]: any[] });
   }
 
-  // Делување по автор
   groupByAuthor(newsList: any[]): { [key: string]: any[] } {
     return newsList.reduce((acc, news) => {
       const author = news.author || 'Unknown';
@@ -39,7 +36,6 @@ export class HomepageService {
     }, {} as { [key: string]: any[] });
   }
 
-  // Делување по месец и година на објава
   groupByMonthYear(newsList: any[]): { [key: string]: any[] } {
     return newsList.reduce((acc, news) => {
       if (!news.publishDate) return acc;
