@@ -39,15 +39,23 @@ export class ProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this.productsService.create(this.newProduct).subscribe({
-      next: () => {
-        this.message = '✅ Продуктот е успешно додаден!';
-        this.loadProducts();
-        this.newProduct = { name: '', category: '', quantity: 0 };
-      },
-      error: () => this.message = '❌ Грешка при додавање на продукт'
-    });
-  }
+  const formattedProduct = {
+    ...this.newProduct,
+    quantity: Number(this.newProduct.quantity),
+    purchasePrice: Number(this.newProduct.purchasePrice),
+    salePrice: Number(this.newProduct.salePrice)
+  };
+
+  this.productsService.create(formattedProduct).subscribe({
+    next: () => {
+      this.message = '✅ Продуктот е успешно додаден!';
+      this.loadProducts();
+      this.newProduct = { name: '', category: '', quantity: 0 };
+    },
+    error: () => this.message = '❌ Грешка при додавање на продукт'
+  });
+}
+
 
   deleteProduct(id: number) {
     this.productsService.delete(id).subscribe({
@@ -68,16 +76,26 @@ export class ProductsComponent implements OnInit {
   }
 
   saveEdit() {
-    if (!this.editingProductId) return;
-    this.productsService.update(this.editingProductId, this.editedProduct).subscribe({
-      next: () => {
-        this.message = '✅ Продуктот е успешно изменет!';
-        this.loadProducts();
-        this.cancelEdit();
-      },
-      error: () => this.message = '❌ Грешка при изменување на продукт'
-    });
-  }
+  if (!this.editingProductId) return;
+
+  const formattedEdited = {
+    ...this.editedProduct,
+    quantity: Number(this.editedProduct.quantity),
+    purchasePrice: Number(this.editedProduct.purchasePrice),
+    salePrice: Number(this.editedProduct.salePrice)
+  };
+
+  this.productsService.update(this.editingProductId, formattedEdited).subscribe({
+    next: () => {
+  this.message = '✅ Продуктот е успешно изменет!';
+  this.loadProducts();
+  this.cancelEdit();
+},
+error: () => this.message = '❌ Грешка при изменување на продукт'
+
+  });
+}
+
 
   logout() {
     localStorage.removeItem('token');
