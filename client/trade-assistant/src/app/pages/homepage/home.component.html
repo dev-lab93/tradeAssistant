@@ -1,40 +1,25 @@
-
 <div *ngIf="message" class="message">{{ message }}</div>
 
-<div *ngFor="let category of newsByCategory | keyvalue" class="category-section">
+<div *ngFor="let category of articleByCategory | keyvalue" class="category-section">
   <h3>{{ category.key }}</h3>
-  <div class="news-cards">
-    <div class="news-card" *ngFor="let news of category.value" [ngClass]="category.key.toLowerCase()">
-      <a [routerLink]="['/news', news.id]">
-        <h4>{{ news.title }}</h4>
-        <img *ngIf="news.imageUrl || news.image" [src]="news.imageUrl || news.image" [alt]="news.title"
-          class="news-image" />
-        <p>{{ news.content | slice:0:200 }}...</p>
-        <div class="news-meta">
-          <span>Автор: {{ news.author }}</span>
-          <span>{{ news.publishDate | date:'mediumDate' }}</span>
-        </div>
-      </a>
-    </div>
+
+  <div class="article-card">
+    <app-article-card
+      *ngFor="let article of category.value"
+      [article]="article">
+    </app-article-card>
   </div>
 </div>
 
 <h2>Продукти</h2>
-<div *ngIf="productsList.length; else noProducts" class="news-cards">
-  <div class="news-card" *ngFor="let product of productsList">
-    <a [routerLink]="['/product', product.id]">
-      <h4>{{ product.name }}</h4>
-      <p>Category: {{ product.category }}</p>
-      <p>Quantity: {{ product.quantity }}</p>
-      <p *ngIf="product.distributor">Distributor: {{ product.distributor }}</p>
-      <p *ngIf="product.entryDate">Added: {{ product.entryDate | date:'mediumDate' }}</p>
-      <p *ngIf="product.purchasePrice">Cost: {{ product.purchasePrice | currency }}</p>
-      <p *ngIf="product.barcode">Barcode: {{ product.barcode }}</p>
-      <p *ngIf="product.salePrice">Price: {{ product.salePrice | currency }}</p>
-      <p *ngIf="product.expirationDate">Expires: {{ product.expirationDate | date:'mediumDate' }}</p>
-    </a>
-  </div>
+
+<div *ngIf="productsList.length; else noProducts" class="product-card">
+  <app-product-card
+    *ngFor="let product of productsList"
+    [product]="product">
+  </app-product-card>
 </div>
+
 <ng-template #noProducts>
   <p>Нема продукти за прикажување</p>
 </ng-template>

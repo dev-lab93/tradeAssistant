@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { RoutesService } from '../../services/routes.service';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'app-article-details',
@@ -16,13 +16,13 @@ export class ArticleDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private routesService: RoutesService
+    private routesService: NewsService
   ) {}
 
   ngOnInit() {
   const id = this.route.snapshot.paramMap.get('id');
   if (id) {
-    this.routesService.getOne('news', +id).subscribe({
+    this.routesService.getOne(+id).subscribe({
       next: (res) => this.news = res,
       error: () => this.message = '❌ Грешка при вчитување на веста'
     });

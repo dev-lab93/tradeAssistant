@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RoutesService } from '../../services/routes.service';
+import { NewsService } from '../../services/news.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,14 +21,14 @@ export class NewsComponent implements OnInit {
   editingNewsId: number | null = null;
   editedNews: any = {};
 
-  constructor(private routesService: RoutesService, private router: Router) {}
+  constructor(private routesService: NewsService, private router: Router) {}
 
   ngOnInit() {
     this.loadNews();
   }
 
   loadNews() {
-    this.routesService.getAll('news').subscribe({
+    this.routesService.getAll().subscribe({
       next: (res: any) => {
         this.newsList = Array.isArray(res.items) ? res.items : [];
       },
@@ -37,7 +37,7 @@ export class NewsComponent implements OnInit {
   }
 
   addNews() {
-    this.routesService.create('news', this.newNews).subscribe({
+    this.routesService.create(this.newNews).subscribe({
       next: () => {
         this.message = '✅ Веста е успешно додадена!';
         this.loadNews();
@@ -49,7 +49,7 @@ export class NewsComponent implements OnInit {
 
   deleteNews(id?: number) {
     if (id === undefined) return;
-    this.routesService.delete('news', id).subscribe({
+    this.routesService.delete(id).subscribe({
       next: () => this.loadNews(),
       error: () => this.message = '❌ Грешка при бришење на вест'
     });
@@ -73,7 +73,7 @@ export class NewsComponent implements OnInit {
 
   saveEdit() {
     if (!this.editingNewsId) return;
-    this.routesService.update('news', this.editingNewsId, this.editedNews).subscribe({
+    this.routesService.update(this.editingNewsId, this.editedNews).subscribe({
       next: () => {
         this.message = '✅ Веста е успешно изменета!';
         this.loadNews();
