@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService, Product } from '../../services/product.service';
 import { NgIf } from '@angular/common';
-import { NavbarComponent } from "../../shared/navbar/navbar.component";
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, NgIf, NavbarComponent, RouterLink],
+  imports: [CommonModule, NgIf, RouterLink],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })
