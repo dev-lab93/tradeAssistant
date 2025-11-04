@@ -1,9 +1,17 @@
-/* Wrapper - за да не го покрива navbar */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.login-wrapper {
+  flex: 1;
+}
+
 .login-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-top: 100px; /* за да има простор под navbar */
   min-height: calc(100vh - 80px);
   background: linear-gradient(135deg, #001f3f, #0074d9);
 }
@@ -31,7 +39,7 @@
 
 /* Inputs */
 .login-container input {
-  width: 100%;
+  width: 85%;
   padding: 12px 15px;
   margin: 10px 0;
   border: none;
@@ -54,7 +62,7 @@
 
 /* Button */
 .login-container button {
-  width: 100%;
+  width: 60%;
   background: #00d4ff;
   border: none;
   padding: 12px;
