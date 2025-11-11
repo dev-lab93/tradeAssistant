@@ -1,6 +1,9 @@
 <ng-container *ngIf="isLoading; else content">
-  <app-loading-spinner message="Вчитување вести и продукти..."></app-loading-spinner>
+  <app-loading-spinner
+    message="Ве молиме почекајте... бидејќи користиме бесплатен сервис, првото вчитување може да трае и до 2 минути.">
+  </app-loading-spinner>
 </ng-container>
+
 
 <ng-template #content>
   <div *ngIf="message" class="message">{{ message }}</div>
