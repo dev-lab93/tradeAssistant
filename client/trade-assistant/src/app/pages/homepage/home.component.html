@@ -1,25 +1,31 @@
-<div *ngIf="message" class="message">{{ message }}</div>
+<ng-container *ngIf="isLoading; else content">
+  <app-loading-spinner></app-loading-spinner>
+</ng-container>
 
-<div *ngFor="let category of articleByCategory | keyvalue" class="category-section">
-  <h3>{{ category.key }}</h3>
+<ng-template #content>
+  <div *ngIf="message" class="message">{{ message }}</div>
 
-  <div class="article-card">
-    <app-article-card
-      *ngFor="let article of category.value"
-      [article]="article">
-    </app-article-card>
+  <div *ngFor="let category of articleByCategory | keyvalue" class="category-section">
+    <h3>{{ category.key }}</h3>
+
+    <div class="article-card">
+      <app-article-card
+        *ngFor="let article of category.value"
+        [article]="article">
+      </app-article-card>
+    </div>
   </div>
-</div>
 
-<h2>Продукти</h2>
+  <h2>Продукти</h2>
 
-<div *ngIf="productsList.length; else noProducts" class="product-card">
-  <app-product-card
-    *ngFor="let product of productsList"
-    [product]="product">
-  </app-product-card>
-</div>
+  <div *ngIf="productsList.length; else noProducts" class="product-card">
+    <app-product-card
+      *ngFor="let product of productsList"
+      [product]="product">
+    </app-product-card>
+  </div>
 
-<ng-template #noProducts>
-  <p>Нема продукти за прикажување</p>
+  <ng-template #noProducts>
+    <p>Нема продукти за прикажување</p>
+  </ng-template>
 </ng-template>

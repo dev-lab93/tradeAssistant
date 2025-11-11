@@ -7,6 +7,7 @@ import { ProductsService, Product } from '../../services/product.service';
 
 import { ArticleCardComponent } from '../../shared/article-card/article-card.component';
 import { ProductCardComponent } from '../../shared/product-card/product-card.component';
+import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ import { ProductCardComponent } from '../../shared/product-card/product-card.com
     CommonModule,
     RouterModule,
     ArticleCardComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    LoadingSpinnerComponent
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
@@ -27,6 +29,9 @@ export class HomeComponent implements OnInit {
 
   productsList: Product[] = [];
   message = '';
+
+  isLoadingNews = true;
+  isLoadingProducts = true;
 
   constructor(
     private newsService: NewsService,
@@ -44,7 +49,8 @@ export class HomeComponent implements OnInit {
         this.articleList = Array.isArray(res) ? res : res.items ? res.items : [];
         this.articleByCategory = this.newsService.groupByCategory(this.articleList);
       },
-      error: () => (this.message = '❌ Грешка при вчитување на вести')
+      error: () => (this.message = '❌ Грешка при вчитување на вести'),
+      complete: () => (this.isLoadingNews = false)
     });
   }
 
@@ -57,7 +63,12 @@ export class HomeComponent implements OnInit {
             ? res.items
             : [];
       },
-      error: () => (this.message = '❌ Грешка при вчитување на продукти')
+      error: () => (this.message = '❌ Грешка при вчитување на продукти'),
+      complete: () => (this.isLoadingProducts = false)
     });
+  }
+
+  get isLoading(): boolean {
+    return this.isLoadingNews || this.isLoadingProducts;
   }
 }
