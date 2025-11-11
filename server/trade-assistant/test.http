@@ -34,7 +34,7 @@ POST http://localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "marija.admin@example.com",
+  "email": "moderator@trade.com",
   "password": "supersecret"
 }
 
@@ -114,7 +114,7 @@ GET http://localhost:3000/api/users/2/summary
 
 ### Create new product
 POST http://localhost:8080/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoibWFyaWphLmFkbWluQGV4YW1wbGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzYwNjI5MzQ0LCJleHAiOjE3NjA3MTU3NDR9.rmpEdwTyfSy2AawcrZtZQ_auRYF_Y_kuC7XFHHkzhOk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoibW9kZXJhdG9yQHRyYWRlLmNvbSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjI4MTUzMjAsImV4cCI6MTc2MjkwMTcyMH0.lHBY7BJ1S5pMNqjvOj1XJu9VxWwhR33B_umIcFFd5J4
 Content-Type: application/json
 
 {
@@ -133,8 +133,8 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/news/11
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDIxMDc5MiwiZXhwIjoxNzYwMjk3MTkyfQ._74m76iGsjlg6Q3X7qELK2D0y_GflwrbNrXOs8hwfag
+DELETE http://localhost:8080/products/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsIjoiYWRtaW5AdHJhZGUuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzYyNDcyMDA2LCJleHAiOjE3NjI1NTg0MDZ9.onnWW5fL1M9YVxyWYvcn_k64L8GmozMCMlBNXJ08nuA
 Content-Type: application/json
 
 
@@ -167,15 +167,15 @@ Content-Type: application/json
 
 
 ### 1️⃣ CREATE News
-GET  http://localhost:3000/news/
+POST  http://localhost:8080/news/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE4LCJlbWFpbCI6Im1hcmlqYS5hZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDQ3NTM0OCwiZXhwIjoxNzYwNTYxNzQ4fQ.S36wLlWBxPaKmgKZZPRKUxG5BSoP8ZFxu39if1zvr2o
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoibW9kZXJhdG9yQHRyYWRlLmNvbSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjI4MTUzMjAsImV4cCI6MTc2MjkwMTcyMH0.lHBY7BJ1S5pMNqjvOj1XJu9VxWwhR33B_umIcFFd5J4
 
 {
   "title": "NestJS 2025 Release",
   "content": "New features added in NestJS 2025 version...",
   "author": "Nikola",
-  "publishDate": "2025-10-10",
+  "publishDate": "2025-11-11",
   "category": "technology"
 }
 
@@ -194,8 +194,8 @@ Authorization: Bearer <JWT_TOKEN>
 ###
 
 ### 4️⃣ UPDATE News
-PUT http://localhost:3000/news/1
-Authorization: Bearer <JWT_TOKEN>
+PUT http://localhost:8080/news/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImVtYWlsIjoibW9kZXJhdG9yQHRyYWRlLmNvbSIsInJvbGUiOiJtb2RlcmF0b3IiLCJpYXQiOjE3NjI4MTUzMjAsImV4cCI6MTc2MjkwMTcyMH0.lHBY7BJ1S5pMNqjvOj1XJu9VxWwhR33B_umIcFFd5J4
 Content-Type: application/json
 
 {

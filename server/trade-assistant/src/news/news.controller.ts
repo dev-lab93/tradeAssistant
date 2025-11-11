@@ -46,7 +46,7 @@ async publishDailyForex() {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin', 'editor')
+  @Roles('admin', 'manager')
   @Post()
   create(@Body() dto: CreateNewsDto) {
     return this.newsService.create(dto);
