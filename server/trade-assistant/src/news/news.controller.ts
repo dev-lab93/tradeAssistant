@@ -46,14 +46,14 @@ async publishDailyForex() {
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin', 'manager')
+  @Roles('admin')
   @Post()
   create(@Body() dto: CreateNewsDto) {
     return this.newsService.create(dto);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles('admin', 'editor')
+  @Roles('admin')
   @Put(':id')
   update(@Param('id', new ParseIntPipe({
     errorHttpStatusCode: 400,

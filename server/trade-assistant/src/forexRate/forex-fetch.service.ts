@@ -12,7 +12,6 @@ export class ForexFetchService {
 
   constructor(private readonly forexRateService: ForexRateService) {}
 
-  // Автоматски повик на секои 8 часа
   @Cron(CronExpression.EVERY_8_HOURS)
   async fetchAndSave() {
     try {

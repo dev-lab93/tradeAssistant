@@ -14,7 +14,6 @@ export class NewsPublishService {
         private readonly forexAnalysisService: ForexAnalysisService,
     ) { }
 
-    // Cron секој ден во 08:00
     @Cron('0 8 * * *')
     async publishDailyForexAnalysis(): Promise<boolean> {
         try {

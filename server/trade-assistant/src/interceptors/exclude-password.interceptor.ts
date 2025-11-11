@@ -17,12 +17,10 @@ export class ExcludePasswordInterceptor implements NestInterceptor {
       map((data) => {
         if (!data) return data;
 
-        // ако е листа од корисници
         if (Array.isArray(data)) {
           return data.map(({ password, ...rest }) => rest);
         }
 
-        // ако е еден објект
         const { password, ...rest } = data;
         return rest;
       }),

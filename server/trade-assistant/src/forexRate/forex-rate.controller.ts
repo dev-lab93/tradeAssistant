@@ -34,7 +34,6 @@ export class ForexRateController {
     return this.forexAnalysisService.analyzeDailyTrends();
   }
 
-  // **Внесување на курсеви рачно**
   @Post('create')
   async create(@Body() dto: CreateForexRateDto) {
     const record = {
