@@ -4,14 +4,11 @@
 <div class="add-product-form">
   <h3>Додај Продукт</h3>
   <input [(ngModel)]="newProduct.name" placeholder="Име на продукт" />
-  <input
-    [(ngModel)]="newProduct.image"
-    placeholder="Cloudinary URL на слика"
-  />
+  <input [(ngModel)]="newProduct.image" placeholder="Cloudinary URL на слика" />
   <img
     *ngIf="newProduct.image"
     [src]="newProduct.image"
-    alt="News image"
+    alt="Product image"
     class="newsImage"
   />
   <input [(ngModel)]="newProduct.category" placeholder="Категорија" />
@@ -31,7 +28,7 @@
 <!-- Листа на продукти со edit -->
 <div class="product-list">
   <h3>Листа на Продукти</h3>
-<div *ngFor="let product of productsList">
+  <div *ngFor="let product of productsList">
 
     <!-- Ако продуктот е во edit режим -->
     <div *ngIf="editingProductId === product.id; else viewMode">
@@ -60,9 +57,16 @@
       <p>Внесено: {{ product.entryDate }} | Истек: {{ product.expirationDate }}</p>
       <p>Цена купување: {{ product.purchasePrice }} | Цена продажба: {{ product.salePrice }}</p>
       <p>Баркод: {{ product.barcode }}</p>
-      <button *ngIf="product.id !== undefined" (click)="deleteProduct(product.id!)">Избриши</button>
-      <button *ngIf="product.id !== undefined" (click)="startEdit(product)">Edit</button>
+      <button (click)="openDeleteModal(product.id!)">Избриши</button>
+      <button (click)="startEdit(product)">Edit</button>
     </ng-template>
 
   </div>
 </div>
+
+<app-confirm-modal
+  *ngIf="showDeleteModal"
+  [message]="'Дали сте сигурни дека сакате да го избришете овој продукт?'"
+  (confirm)="confirmDelete()"
+  (cancel)="cancelDelete()">
+</app-confirm-modal>
