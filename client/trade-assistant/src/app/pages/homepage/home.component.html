@@ -9,7 +9,7 @@
   <div *ngIf="message" class="message">{{ message }}</div>
 
   <div *ngFor="let category of articleByCategory | keyvalue" class="category-section">
-    <h3>{{ category.key }}</h3>
+    <h3 class="categoryname">{{ category.key }}</h3>
 
     <div class="article-card">
       <app-article-card
