@@ -17,11 +17,11 @@ export class ProductsComponent implements OnInit {
   message = '';
 
   // Нов продукт за додавање
-  newProduct: Product = { name: '', category: '', quantity: 0 };
+  newProduct: Product = { name: '', image: '', category: '', quantity: 0 };
 
   // За edit
   editingProductId: number | null = null;
-  editedProduct: Product = { name: '', category: '', quantity: 0 };
+  editedProduct: Product = { name: '', image: '', category: '', quantity: 0 };
 
   constructor(private productsService: ProductsService, private router: Router) {}
 
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit {
     next: () => {
       this.message = '✅ Продуктот е успешно додаден!';
       this.loadProducts();
-      this.newProduct = { name: '', category: '', quantity: 0 };
+      this.newProduct = { name: '', image: '', category: '', quantity: 0 };
     },
     error: () => this.message = '❌ Грешка при додавање на продукт'
   });
@@ -72,7 +72,7 @@ export class ProductsComponent implements OnInit {
 
   cancelEdit() {
     this.editingProductId = null;
-    this.editedProduct = { name: '', category: '', quantity: 0 };
+    this.editedProduct = { name: '', image: '', category: '', quantity: 0 };
   }
 
   saveEdit() {

@@ -4,6 +4,16 @@
 <div class="add-product-form">
   <h3>Додај Продукт</h3>
   <input [(ngModel)]="newProduct.name" placeholder="Име на продукт" />
+  <input
+    [(ngModel)]="newProduct.image"
+    placeholder="Cloudinary URL на слика"
+  />
+  <img
+    *ngIf="newProduct.image"
+    [src]="newProduct.image"
+    alt="News image"
+    class="newsImage"
+  />
   <input [(ngModel)]="newProduct.category" placeholder="Категорија" />
   <input [(ngModel)]="newProduct.quantity" type="number" placeholder="Количина" />
   <input [(ngModel)]="newProduct.distributor" placeholder="Дистрибутер" />
@@ -26,6 +36,7 @@
     <!-- Ако продуктот е во edit режим -->
     <div *ngIf="editingProductId === product.id; else viewMode">
       <input [(ngModel)]="editedProduct.name" placeholder="Име на продукт" />
+      <input [(ngModel)]="editedProduct.image" placeholder="Cloudinary URL на слика" />
       <input [(ngModel)]="editedProduct.category" placeholder="Категорија" />
       <input [(ngModel)]="editedProduct.quantity" type="number" placeholder="Количина" />
       <input [(ngModel)]="editedProduct.distributor" placeholder="Дистрибутер" />
@@ -42,6 +53,7 @@
     <!-- View режим -->
     <ng-template #viewMode>
       <h4>{{ product.name }}</h4>
+      <img *ngIf="product.image" [src]="product.image" class="preview" alt="Product image" />
       <p>Категорија: {{ product.category }}</p>
       <p>Количина: {{ product.quantity }}</p>
       <p>Дистрибутер: {{ product.distributor }}</p>

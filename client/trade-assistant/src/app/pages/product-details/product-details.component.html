@@ -5,6 +5,9 @@
 
 <div *ngIf="product" class="product-details-card">
   <h2>{{ product.name }}</h2>
+  <img *ngIf="product.image"
+         [src]="product.image"
+         class="product-image" />
   <p><strong>Category:</strong> {{ product.category }}</p>
   <p><strong>Quantity:</strong> {{ product.quantity }}</p>
   <p *ngIf="product.distributor"><strong>Distributor:</strong> {{ product.distributor }}</p>

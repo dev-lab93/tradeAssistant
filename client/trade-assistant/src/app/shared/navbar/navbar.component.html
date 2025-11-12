@@ -1,14 +1,12 @@
 <nav class="navbar">
   <div class="logo" routerLink="/">🌍 Trade Assistant</div>
 
-  <!-- Сендвич копче -->
   <div class="menu-icon" (click)="toggleMenu()">
     <span></span>
     <span></span>
     <span></span>
   </div>
 
-  <!-- Линкови -->
   <ul class="nav-links" [class.active]="isMenuOpen">
     <li><a routerLink="/" (click)="toggleMenu()">Почетна</a></li>
     <li><a routerLink="/about" (click)="toggleMenu()">За нас</a></li>
