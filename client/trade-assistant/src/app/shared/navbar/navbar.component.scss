@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #0f65b1, #0d134b);
+  background: linear-gradient(90deg, #004e92, #000428);
   color: white;
   padding: 15px 40px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -12,37 +12,15 @@
 }
 
 .logo {
+  font-size: 1.6rem;
+  font-weight: bold;
   cursor: pointer;
-  display: top;
-  align-items: center;
-
-  .logo-svg {
-    height: 65px; /* висина на логото */
-    width: auto;  /* одржување на пропорции */
-    transition: transform 0.3s ease;
-
-    text {
-      font-weight: 535;
-      font-size: 38px; /* помала големина за текстот */
-    }
-  }
-
-  &:hover .logo-svg {
-    transform: scale(1.05);
-  }
+  transition: 0.3s;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .logo .logo-svg {
-    height: 40px;
-
-    text {
-      font-size: 14px;
-    }
-  }
+.logo:hover {
+  color: #00d4ff;
 }
-
 
 /* Основно мени */
 .nav-links {
