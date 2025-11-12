@@ -1,5 +1,18 @@
 <nav class="navbar">
-  <div class="logo" routerLink="/">🌍 Trade Assistant</div>
+  <div class="logo" routerLink="/">
+  <svg class="logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 175">
+    <!-- Икона: графикон + стрелка -->
+    <rect x="30" y="80" width="20" height="60" fill="#4b2e05"/>
+    <rect x="70" y="60" width="20" height="80" fill="#d4a017"/>
+    <rect x="110" y="40" width="20" height="100" fill="#4b2e05"/>
+    <polyline points="30,80 70,60 110,40 150,30" fill="none" stroke="#d4a017" stroke-width="4"/>
+    <!-- Текст -->
+    <text x="50%" y="172" font-family="Arial, sans-serif" font-size="38" fill="#4b2e05" text-anchor="middle">
+      Trade Assistant
+    </text>
+  </svg>
+</div>
+
 
   <!-- Сендвич копче -->
   <div class="menu-icon" (click)="toggleMenu()">

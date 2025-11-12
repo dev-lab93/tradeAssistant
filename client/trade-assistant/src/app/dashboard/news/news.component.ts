@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class NewsComponent implements OnInit {
   newsList: any[] = [];
   message = '';
-  newNews = { title: '', content: '', author: '', publishDate: '', category: '' };
+  newNews = { title: '', image: '', content: '', author: '', publishDate: '', category: '' };
 
   // За edit
   editingNewsId: number | null = null;
@@ -41,7 +41,7 @@ export class NewsComponent implements OnInit {
       next: () => {
         this.message = '✅ Веста е успешно додадена!';
         this.loadNews();
-        this.newNews = { title: '', content: '', author: '', publishDate: '', category: '' };
+        this.newNews = { title: '', image: '', content: '', author: '', publishDate: '', category: '' };
       },
       error: () => this.message = '❌ Грешка при додавање на вест'
     });
